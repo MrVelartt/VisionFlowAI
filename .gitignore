@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+db.sqlite3
+media/
+
+# Environments
+.env
+env/
+venv/
+.venv/
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+# Python virtual environments
+Pipfile.lock
+
+# Docker
+*.log
+*.pid
+
+# otros
