@@ -59,6 +59,7 @@ ALLOWED_HOSTS = [
 ]
 CSRF_TRUSTED_ORIGINS = ["https://visionflow.asimetria.ai"]
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
