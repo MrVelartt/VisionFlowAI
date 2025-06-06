@@ -1,0 +1,16 @@
+<div class="flex flex-col items-center justify-center bg-white px-6 py-12">
+  <div class="flex flex-col items-center justify-center max-w-2xl text-center">
+    <p class="text-2xl font-bold mb-3">
+      Potentes funciones de inteligencia artificial
+    </p>
+    <p class="text-base text-gray-600 mb-6">
+      Todo lo que necesita para automatizar sus flujos de trabajo documentales
+      con la tecnología de IA más avanzada
+    </p>
+  </div>
+  <div class="flex flex-row flex-wrap justify-center gap-4">
+    @for (feature of features(); track feature.id) {
+    <app-feature-ai [feature]="feature" />
+    }
+  </div>
+</div>

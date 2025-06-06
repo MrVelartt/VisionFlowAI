@@ -1,0 +1,19 @@
+<div class="container mx-auto">
+  <app-simple-header />
+
+  <div class="flex flex-col justify-center px-6 py-12">
+    <div
+      class="flex flex-col items-center text-center md:items-start md:text-left justify-center"
+    >
+      <p class="text-2xl font-bold mb-3">Centro de descargas</p>
+      <p class="text-base text-gray-600 mb-6">
+        Ver y descargar sus documentos tramitados
+      </p>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-5 p-3 md:p-6">
+    <app-documents-filters />
+    <app-documents-table [documents]="documents()" />
+  </div>
+</div>

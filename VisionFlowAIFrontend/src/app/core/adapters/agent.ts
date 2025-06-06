@@ -1,0 +1,1 @@
+export const agentAdapter = (agent: any) => agent;

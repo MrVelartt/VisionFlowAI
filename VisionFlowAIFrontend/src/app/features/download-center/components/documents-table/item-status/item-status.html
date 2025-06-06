@@ -1,0 +1,16 @@
+@let statusLocal = status(); @switch (statusLocal.key) { @case('processed') {
+<span
+  class="bg-green-600 text-green-100 text-xs font-medium me-2 px-2.5 py-1 block w-20 text-center rounded-sm dark:bg-green-900 dark:text-green-300"
+  >{{statusLocal.value}}</span
+>
+} @case('pending') {
+<span
+  class="bg-yellow-500 text-yellow-100 text-xs font-medium me-2 px-2.5 py-0.5 block w-20 text-center rounded-sm dark:bg-yellow-900 dark:text-yellow-300"
+  >{{statusLocal.value}}</span
+>
+} @case('error') {
+<span
+  class="bg-red-600 text-red-100 text-xs font-medium me-2 px-2.5 py-0.5 block w-20 text-center rounded-sm dark:bg-red-900 dark:text-red-300"
+  >{{statusLocal.value}}</span
+>
+} }
