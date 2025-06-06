@@ -1,0 +1,40 @@
+@let statusLocal = status();
+<div class="flex lfex-wrap gap-2">
+  @if (statusLocal.key === 'processed') {
+  <button
+    type="button"
+    class="flex gap-1 items-center text-white cursor-pointer bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-3 py-1 text-center dark:bg-green-600 dark:hover:bg-green-700"
+    (click)="onDownload()"
+  >
+    <lucide-angular [name]="iconFileDowm" size="18" />
+    Excel
+  </button>
+
+  <button
+    type="button"
+    class="flex gap-1 text-gray-900 bg-white cursor-pointer border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-3 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600"
+    (click)="onView()"
+  >
+    <lucide-angular [name]="iconEye" size="18" />
+    Ver
+  </button>
+  } @else if (statusLocal.key === 'pending') {
+  <button
+    type="button"
+    class="flex gap-1 text-gray-900 bg-white cursor-pointer border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-3 py-1 disabled:bg-gray-300 disabled:cursor-no-drop dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600"
+    disabled
+  >
+    <lucide-angular [name]="iconClock" size="18" />
+    Pendiente
+  </button>
+  } @else {
+  <button
+    type="button"
+    class="flex gap-1 text-gray-900 bg-white cursor-pointer border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-3 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600"
+    (click)="onRetry()"
+  >
+    <lucide-angular [name]="iconRotateCcw" size="18" />
+    Reintentar
+  </button>
+  }
+</div>

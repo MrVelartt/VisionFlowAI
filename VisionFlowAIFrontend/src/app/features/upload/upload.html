@@ -1,0 +1,47 @@
+<div class="container mx-auto">
+  <app-simple-header />
+
+  <div class="flex flex-col justify-center px-6 py-12 mx-auto md:max-w-3xl">
+    <div
+      class="flex flex-col items-center text-center md:items-start md:text-left justify-center"
+    >
+      <p class="text-2xl font-bold mb-3">Cargar documentos</p>
+      <p class="text-base text-gray-600 mb-6">
+        Cargue sus documentos empresariales para procesarlos y analizarlos con
+        IA
+      </p>
+    </div>
+
+    @let formLocal = form();
+    <form
+      class="flex flex-col items-start justify-center p-3 sm:p-6 border border-gray-300 rounded-lg shadow-sm dark"
+      (ngSubmit)="onSubmit()"
+    >
+      <label class="text-base text-gray-600 mb-2 font-medium"
+        >Tipo de documento</label
+      >
+
+      <div class="form-group">
+        <app-doc-types [docTypes]="docTypes()" [docTypecontrol]="toFormControl(formLocal.get('docType'))" />
+
+        <app-form-error [control]="formLocal.get('docType')" />
+      </div>
+
+      <div class="form-group mt-6 w-full">
+        <app-file-input [fileControl]="toFormControl(formLocal.get('file'))" />
+        <app-form-error [control]="formLocal.get('file')" />
+      </div>
+
+      <div class="flex items-center justify-end w-full mt-6">
+        <button
+          type="submit"
+          class="flex justify-center items-center text-white w-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer sm:w-auto"
+          [routerLink]="'/upload'"
+        >
+          <lucide-angular [name]="iconBot" class="mr-1 text-white" />
+          Procesar documento
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

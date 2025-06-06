@@ -1,0 +1,20 @@
+@let workLocal = work();
+<div
+  class="flex flex-col items-center justify-start text-center max-w-full h-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm xs:max-w-56 dark:bg-gray-800 dark:border-gray-700"
+>
+  <div
+    class="grid place-content-center p-1 rounded-full size-10 text-white {{ workLocal.classBackgroundColor }}"
+  >
+    {{ index() }}
+  </div>
+  <p class="my-2 font-bold tracking-tight text-gray-900 dark:text-white">
+    {{ workLocal.title }}
+  </p>
+  <p class="mb-3 text-sm font-normal text-gray-500 dark:text-gray-400">
+    {{ workLocal.description }}
+  </p>
+  <lucide-angular
+    [name]="workLocal.icon"
+    [class]="workLocal.classTextColor"
+  ></lucide-angular>
+</div>

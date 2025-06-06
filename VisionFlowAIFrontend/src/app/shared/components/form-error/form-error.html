@@ -1,0 +1,21 @@
+@let controlLocal = control(); @if (controlLocal && controlLocal.touched &&
+controlLocal.invalid) {
+<span class="text-red-600 text-xs mt-1">
+  @if (controlLocal.hasError("required")) { Este campo es obligatorio } @else if
+  (controlLocal.hasError("pattern")) { Ingrese un correo válido } @else if
+  (controlLocal.hasError("minlength")) { Ingrese al menos {{
+  controlLocal.getError("minlength").requiredLength }} caracteres } @else if
+  (controlLocal.hasError("maxlength")) { Ingrese máximo {{
+  controlLocal.getError("maxlength").requiredLength }} caracteres } @else if
+  (controlLocal.hasError("min")) { Ingrese un valor mayor o igual a {{
+  controlLocal.getError("min").min }} } @else if (controlLocal.hasError("max"))
+  { Ingrese un valor menor o igual a {{ controlLocal.getError("max").max }} }
+  @else if (controlLocal.hasError("password")) { La contraseña debe tener al
+  menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un
+  caracter especial } @else if (controlLocal.hasError("passwordsNotMatch")) {
+  Las contraseñas no coinciden } @else if
+  (controlLocal.hasError("invalidEmail")) { El correo ya se encuentra registrado
+  } @else if (controlLocal.hasError("invalidUsername")) { El nombre de usuario
+  ya se encuentra registrado }
+</span>
+}

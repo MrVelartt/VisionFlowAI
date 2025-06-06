@@ -1,0 +1,89 @@
+<footer class="p-4 bg-white sm:px-6 sm:py-12 dark:bg-gray-800">
+  <div class="mx-auto max-w-screen-xl">
+    <div class="md:flex md:justify-between">
+      <div class="mb-6 md:mb-0 md:max-w-72 lg:max-w-96">
+        <a [routerLink]="'/'" class="flex items-center mb-3">
+          <img
+            src="icons/logo.svg"
+            class="mr-3 h-6 sm:h-9"
+            alt="VisionFlow AI Logo"
+          />
+          <span
+            class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+            >VisionFlow AI</span
+          >
+        </a>
+        <p class="mb-0 text-gray-600">
+          Transformación de documentos empresariales con automatización y visión
+          por ordenador basadas en IA.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+        <div>
+          <h2
+            class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+          >
+            Producto
+          </h2>
+          <ul class="text-gray-600 dark:text-gray-400">
+            <li class="mb-4">
+              <a
+                class="hover:underline"
+                (click)="scrollToSection(SECTION_FEAUTURES_ID)"
+                >Características</a
+              >
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                (click)="scrollToSection(SECTION_HOW_IT_WORKS_ID)"
+                >Cómo funciona</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2
+            class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+          >
+            Compañía
+          </h2>
+          <ul class="text-gray-600 dark:text-gray-400">
+            <li class="mb-4">
+              <a [routerLink]="'/about'" class="hover:underline">Nosotros</a>
+            </li>
+            <li class="mb-4">
+              <a [routerLink]="'/contact'" class="hover:underline">Contacto</a>
+            </li>
+            <li>
+              <a [routerLink]="'/support'" class="hover:underline">Soporte</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2
+            class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+          >
+            Legal
+          </h2>
+          <ul class="text-gray-600 dark:text-gray-400">
+            <li class="mb-4">
+              <a href="#" class="hover:underline">Politicas de privacidad</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Términos &amp; Condiciones</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+    <div class="sm:flex sm:items-center sm:justify-center">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+        >© 2025
+        <a href="https://flowbite.com" class="hover:underline">VisionFlow AI</a
+        >. Todos los derechos reservados.
+      </span>
+    </div>
+  </div>
+</footer>

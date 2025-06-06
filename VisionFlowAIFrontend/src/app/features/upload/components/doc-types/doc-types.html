@@ -1,0 +1,16 @@
+@let control = docTypecontrol();
+<ul class="flex flex-wrap m-0 gap-2">
+  @for (docType of docTypes(); track docType.type) {
+  <li>
+    <button
+      type="button"
+      class="text-gray-600 bg-white border border-gray-300 outline-none cursor-pointer font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center hover:bg-gray-100 hover:font-bold dark:text-white dark:bg-blue-600 dark:hover:bg-blue-400"
+      [class]="docType.type === control?.value ? 'border-sky-500 border-2 dark:border-red-500' : ''"
+      (click)="docTypeChange(docType.type)"
+    >
+      <lucide-angular [name]="docType.icon" class="me-1" size="18" />
+      {{ docType.name }}
+    </button>
+  </li>
+  }
+</ul>

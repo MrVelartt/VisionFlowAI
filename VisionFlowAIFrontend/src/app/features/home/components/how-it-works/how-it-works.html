@@ -1,0 +1,14 @@
+<div class="flex flex-col items-center justify-center bg-gray-100 px-6 py-12">
+  <div class="flex flex-col items-center justify-center max-w-2xl text-center">
+    <p class="text-2xl font-bold mb-3">Cómo funciona VisionFlow AI</p>
+    <p class="text-base text-gray-600 mb-6">
+      Procesamiento de documentos sencillo, potente y automatizado en cuatro
+      sencillos pasos
+    </p>
+  </div>
+  <div class="flex flex-row flex-wrap justify-center gap-4">
+    @for (work of works(); track work.id) {
+    <app-step-work [work]="work" [index]="$index + 1" />
+    }
+  </div>
+</div>
