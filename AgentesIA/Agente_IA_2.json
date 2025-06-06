@@ -1,0 +1,168 @@
+{
+  "name": "Agente IA 2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "=subject:\"VisionFlowAI\" has:attachment"
+        },
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "=attachment_",
+          "downloadAttachments": "={{ true }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -200,
+        0
+      ],
+      "id": "cd61e95e-77aa-45b3-a81f-fdb0d48f6459",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "f0aVTqDYsnaj45NC",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://surf-rejected-wagner-attachments.trycloudflare.com/api/facturas/",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "cliente",
+              "value": "={{ $json[\"from\"].value[0].address }}"
+            },
+            {
+              "name": "correo_electronico",
+              "value": "={{ $json[\"from\"].value[0].address }}"
+            },
+            {
+              "name": "descripcion",
+              "value": "={{ $json[\"subject\"] }}"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "archivos",
+              "inputDataFieldName": "=attachment_0"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "archivos",
+              "inputDataFieldName": "attachment_1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        20,
+        0
+      ],
+      "id": "7417c56e-9ddf-4669-98fd-7765e4ea1b5d",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.cliente }}",
+        "subject": "VisionFlowAI",
+        "message": "Recibimos su soliicitud, esta en proceso",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        -120
+      ],
+      "id": "d54d2e61-0505-48bc-813c-4fa9050a5101",
+      "name": "Gmail",
+      "webhookId": "d16bf233-e79c-497a-b413-8dde8cfc36ef",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "f0aVTqDYsnaj45NC",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Gmail Trigger').item.json.headers.to }}",
+        "subject": "Documento en Proceso",
+        "message": "=Iniciamos proceso con el cliente  {{ $json.cliente }} y {{ $json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        60
+      ],
+      "id": "ca21c4b3-ad7f-4b04-80e8-7cb7cb725b72",
+      "name": "Gmail1",
+      "webhookId": "d16bf233-e79c-497a-b413-8dde8cfc36ef",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "f0aVTqDYsnaj45NC",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Gmail1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ec5ce52a-9897-4e7b-9755-ec94f5b9c06f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bd03f463cd8ab1daffa59c42120aba896aaf2617be890ee8cd788de4ec470906"
+  },
+  "id": "kYXBUljcl47oRnWF",
+  "tags": []
+}
