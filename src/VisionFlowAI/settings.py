@@ -51,7 +51,14 @@ STORAGES = {
 SECRET_KEY = 'django-insecure-bvll*cixf(_5d(!6j%&g_b(ywptu6bwza%8^kgsi@b6!2)w-9m'
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'apparent-substantially-tie-click.trycloudflare.com',
+    'visionflow.asimetria.ai',
+]
+CSRF_TRUSTED_ORIGINS = ["https://visionflow.asimetria.ai"]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',

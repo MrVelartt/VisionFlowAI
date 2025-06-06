@@ -13,14 +13,14 @@ services:
   web:
     build: ./src
     container_name: django_app
+    image: registry.digitalocean.com/cualquiera/django:4
+    platform: linux/amd64
     restart: always
     depends_on:
       - db
-#        condition: service_healthy
     env_file: .envs/.env
     ports:
       - "8000:8000"
     volumes:
-      # ===> Aquí montamos la carpeta raíz completa en /app <===
       - ./src:/app
     command: python manage.py runserver 0.0.0.0:8000
