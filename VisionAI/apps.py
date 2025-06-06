@@ -1,6 +1,9 @@
+# VisionAI/apps.py
 from django.apps import AppConfig
 
-
-class VisionaiConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+class VisionAiConfig(AppConfig):
     name = 'VisionAI'
+
+    def ready(self):
+        # Importar el módulo signals para que se registre el receptor
+        import VisionAI.signals
