@@ -1,0 +1,167 @@
+{
+  "name": "AI Agent 1",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{$json.messages[0].text.body}}",
+        "options": {
+          "systemMessage": "Eres el asistente comercial de VisionFlow AI.\n\nReglas:\n1. SALUDO → Si la memoria está vacía o el usuario solo dice “hola”, responde: “¡Hola! ¿En qué puedo ayudarte?”\n2. INTENCIÓN DE SERVICIO → Si el usuario menciona factura(s), OCR, procesamiento de documentos o “necesito un servicio”, responde en ≤ 25 palabras:\n   - Una frase que confirme que podemos procesar sus documentos.\n   - El correo exacto donde debe enviarlos: velarttdesign@gmail.com\n   - Cierra con “¡Quedo atento!”\n3. PREGUNTA DE CONFIRMACIÓN → Si el usuario pregunta algo como “¿solo envío allí?” o “¿algo más?”, responde: “Sí, envíalos a velarttdesign@gmail.com. Cualquier duda, aquí estoy.”\n4. Después de la regla 2 o 3 no vuelvas a ofrecer el correo salvo que el usuario lo solicite explícitamente.\nResponde SIEMPRE en español, tono cordial y profesional."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        40,
+        -80
+      ],
+      "id": "6ca7d322-d7a3-4bc3-9d5a-1ecaaf365c40",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-3.5-turbo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        40,
+        80
+      ],
+      "id": "4d27d22c-cc85-4d0d-9d70-ca29ac769d30",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "QnrpQ46jtF4bsvwc",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "ChatHistory",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        140,
+        220
+      ],
+      "id": "8ff80a03-a8ef-49dc-9956-96c3c6f0d75f",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -80
+      ],
+      "id": "1dff5129-ad2b-493f-b745-6904d4f8fd75",
+      "name": "WhatsApp Trigger",
+      "webhookId": "8492fa9f-b052-49c1-9365-ac42f3df0343",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "CdvUjv0mIMpwhk2X",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "713814525139155",
+        "recipientPhoneNumber": "573027470798",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -80
+      ],
+      "id": "21d9db65-02d1-4be1-b309-fa80d506a05a",
+      "name": "WhatsApp Respuesta",
+      "webhookId": "da08c88b-0f5d-4ae3-9345-e299d674a5a6",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "vxJxs5XobvEumRUu",
+          "name": "WhatsApp account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2f358d4d-26a2-4431-b4a9-a9c17e2ae815",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bd03f463cd8ab1daffa59c42120aba896aaf2617be890ee8cd788de4ec470906"
+  },
+  "id": "aCIrDsZUrX87BWNa",
+  "tags": []
+}
