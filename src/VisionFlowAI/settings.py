@@ -26,7 +26,6 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
-
 STORAGES = {
     # Backend “default” para archivos ‘media’ (FileField, ImageField, etc.)
     "default": {
@@ -52,7 +51,6 @@ STORAGES = {
 SECRET_KEY = 'django-insecure-bvll*cixf(_5d(!6j%&g_b(ywptu6bwza%8^kgsi@b6!2)w-9m'
 DEBUG = True
 
-
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
@@ -70,7 +68,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
 
-    'storages',       # debe ir antes de VisionAI
+    'storages',  # debe ir antes de VisionAI
     'VisionAI',
 ]
 
@@ -104,19 +102,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'VisionFlowAI.wsgi.application'
 
-
 # 5. Base de datos PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbfacturas',
-        'USER': 'postgres',
-        'PASSWORD': 'Voluntad1',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('POSTGRES_DB', default='dbfacturas'),
+        'USER': os.getenv('POSTGRES_USER', default='postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='Voluntad1'),
+        'HOST': os.getenv('POSTGRES_HOST', default='localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', default='5432'),
     }
 }
-
 
 # 6. Validación de contraseñas
 AUTH_PASSWORD_VALIDATORS = [
@@ -134,13 +130,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # 7. Internacionalización
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
 
 # 8. Archivos estáticos
 STATIC_URL = '/static/'
@@ -158,12 +152,10 @@ REST_FRAMEWORK = {
     ],
 }
 
-
 # 10. Logging de boto3/botocore (opcional, para depuración)
 logging.basicConfig(level=logging.INFO)
 logging.getLogger('boto3').setLevel(logging.DEBUG)
 logging.getLogger('botocore').setLevel(logging.DEBUG)
-
 
 # 11. Configuración final
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

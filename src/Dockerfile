@@ -44,4 +44,4 @@ RUN mkdir -p /app/media /app/static
 EXPOSE 8000
 
 # 10) Comando por defecto: llaves, migraciones y runserver
-CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+#CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
