@@ -55,7 +55,9 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'apparent-substantially-tie-click.trycloudflare.com',
+    'visionflow.asimetria.ai',
 ]
+CSRF_TRUSTED_ORIGINS = ["https://visionflow.asimetria.ai"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
